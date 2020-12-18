@@ -2,6 +2,7 @@ var db = require('../../config/database');
 var dbFunc = require('../../config/db-function');
 const bcrypt = require('bcrypt');
 
+
 var authenticModel = {
     authentic: authentic,
     signup: signup

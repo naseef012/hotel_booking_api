@@ -17,6 +17,7 @@ function init(router) {
 }
 
 function getAllUsers(req,res) {
+  console.log(" === HELLO ==")
   userService.getAllUser().then((data) => {
       res.send(data);
     }).catch((err) => {
@@ -26,6 +27,7 @@ function getAllUsers(req,res) {
 }
 
 function getUserById(req,res) {
+  console.log(" MAIN HELLO ")
 
   let userId = req.params;
 

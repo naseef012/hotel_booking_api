@@ -11,11 +11,14 @@ var userModel = {
 
 function getAllUser() {
     return new Promise((resolve,reject) => {
-        db.query(`CALL get_user()`,(error,rows,fields)=>{
+        db.query(`SELECT * FROM test`,(error,rows,fields)=>{
             if(!!error) {
+                console.log(" ERROR HELLO  ")
+
                 dbFunc.connectionRelease;
                 reject(error);
             } else {
+                console.log("  HELLO  ")
                 dbFunc.connectionRelease;
                 resolve(rows[0]);
             }
@@ -27,9 +30,13 @@ function getUserById(id) {
     return new Promise((resolve,reject) => {
         db.query("SELECT * FROM test WHERE id ="+id.id,(error,rows,fields)=>{
             if(!!error) {
+                console.log(" USER ID ERROR HELLO  ")
+
                 dbFunc.connectionRelease;
                 reject(error);
             } else {
+                console.log(" USER ID  HELLO  ")
+
                 dbFunc.connectionRelease;
                 resolve(rows);
             }

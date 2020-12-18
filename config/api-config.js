@@ -12,12 +12,14 @@ var AuthenticRoute = require('../app/routes/authentic.route');
 var errorCode = require('../common/error-code')
 var errorMessage = require('../common/error-methods')
 var checkToken = require('./secureRoute');
+let ejs = require('ejs');
 
 // var schedule = require('node-schedule');
  
 // var j = schedule.scheduleJob('*/1 * * * *', function(){
 //   console.log('The answer to life, the universe, and everything!');
 // });
+
 
 dbfunc.connectionCheck.then((data) =>{
     //console.log(data);
@@ -31,8 +33,21 @@ dbfunc.connectionCheck.then((data) =>{
     res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+app.set('views', path.join(__dirname, '../public'));
+app.set('view engine', 'ejs');
+app.engine('html', ejs.renderFile)
 
 app.use(bodyParser.json());
+
+app.use((req,res,next) => {
+  let message = {
+    "API_name": req.url,
+    "REQUEST_BODY": req.body
+  }
+  console.log("=========== END_POINT ======= "+req.url);
+  next();
+});
+
 
 var router = express.Router();
 app.use('/api',router);
@@ -40,8 +55,11 @@ AuthenticRoute.init(router);
 
 var secureApi = express.Router();
 
+// app.set('public', path.join(__dirname, 'public'));
+// app.set('view engine', 'ejs');
+
 //set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 //body parser middleware
 
@@ -57,7 +75,7 @@ app.use(function (err, req, res, next) {
 
 // index route
 app.get('/', (req,res) => {
-    res.send('hello world');
+    res.render('index2.html', {message: "Hello From Node JS"});
 });
 
 var ApiConfig = {
