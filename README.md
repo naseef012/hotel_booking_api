@@ -1,5 +1,7 @@
 # Node JS RESTful Service for Hotel Booking
 
+## I used an open source template of Node JS express with MySQL connection for this Project. All the Assessment related works are done by me. You can find the list of past contributors of this Project in the contributor list. The works done by me are displayed by my commits. 
+
 # Please find the MySQL Dump of the Database in `db_file_dump` folder
 
 # Please find below the link of POSTMAN API Doc link
