@@ -35,7 +35,7 @@ dbfunc.connectionCheck.then((data) =>{
 });
 app.set('views', path.join(__dirname, '../public'));
 app.set('view engine', 'ejs');
-app.engine('html', ejs.renderFile)
+app.engine('html', ejs.renderFile);
 
 app.use(bodyParser.json());
 
@@ -75,7 +75,7 @@ app.use(function (err, req, res, next) {
 
 // index route
 app.get('/', (req,res) => {
-    res.render('index2.html', {message: "Hello From Node JS"});
+    res.render('index2', {message: "Hello From Backend"});
 });
 
 var ApiConfig = {

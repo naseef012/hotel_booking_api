@@ -5,7 +5,7 @@ module.exports = mysql.createPool({
     host : 'localhost',
     user :  'root',
     password: '',
-    database: 'test'
+    database: 'hotel_booking_system'
 })
 
 
