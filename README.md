@@ -1,8 +1,6 @@
-# Node with MySQL BoilerPlate/Framework
+# Node JS RESTful Service for Hotel Booking
 
-A simple and structured way boilerplate for Node with MySQL, equipped with MVC layer model with basic validation of schema and common error handler, authentication and easily pluggable code base.
 
-This Boilerplate have a basic CRUD operation with MySQL, authetication of API endpoint with JWT Token and Validation of request and response of each route. It contained a documentation folder which contain swagger documentation easy for front-end developer to use and understand. It contained Pm2 which helps to restart, reload and monitor application in production, provides zero downtime availability. It has Nodemailer which will send email. It has bcrypt module which will encrypt password and make it more secure. It contain Artillery for load testing.
 
 # PreRequisite
 
@@ -48,43 +46,7 @@ npm install jsonwebtoken
 
 ---
 
-### 5. Nodemon
-```
-npm install nodemon 
-```
-* Nodemon will watch the files in the directory and if file changes automatically restart application  [know more about nodemon](https://www.npmjs.com/package/nodemon)
-* To Know more about nodemon [check here](https://nodemon.io)
-
----
-
-### 6. pm2
-```
-npm install pm2  
-```
-* pm2 will watch, restart and reload application if any crashes happen, it provide cluster mode as well as zero downtime failure.  [know more about pm2](https://www.npmjs.com/package/pm2)
-* To Know more about pm2 [check here](http://pm2.keymetrics.io/docs/usage/quick-start/)
-
----
-
-### 7. nodemailer
-```
-npm install nodemailer  
-```
-* nodemailer will send mail to given mail Id as for now i used for sending if any error comes.[know more about nodemailer](https://www.npmjs.com/package/nodemailer)
-* To Know more about nodemailer [check here](https://nodemailer.com/about/)
-
----
-
-### 8. artillery
-```
-npm install artillery  
-```
-* artillery will perform load testing and gives logs, how sustainable your Api to perform number of request in per second .[know more about artillery](https://www.npmjs.com/package/artillery)
-* To Know more about artillery [check here](https://artillery.io/)
-
----
-
-### 9. bcrypt
+### 5. bcrypt
 ```
 npm install bcrypt  
 ```
@@ -95,19 +57,15 @@ npm install bcrypt
 
 # Table Creation In DB
 
-1. Create Table user with `id,name,age,state,country` columns.
-2. you can try creating your table as well just need to change query and table name in model section.
+SQL File is in the project directory.
 
 # Get Started
 
-1. `$ git clone https://github.com/yug95/node-mysql.git`
+1. `$ git clone https://github.com/naseef012/hotel_booking_api.git`
 2. `$ npm install`
+4. `$ node app.js`
 3. Launch Enviornment:
     * `$ node app.js or nodemon app.js`
-4. In Cluster mode with the help of pm2 [optional step]:
-    * `$ pm2 start app.js or pm2 start app.js -i <no of instances>`
-5. Open in browser:
-    * open `http://localhost:9890`
 
 
 
