@@ -1,0 +1,49 @@
+{
+    "getSchema":{
+       "type": "object",
+       "required": [
+         "room_number",
+         "room_id"     
+       ],
+       "properties": {
+         "room_id" : {
+           "type": "integer"
+         }, 
+         "room_number" : {
+            "type": "integer"
+         }
+       }
+    },
+    "postSchema":{
+        "type": "object",
+        "required": [
+          "phone",
+          "room_id",
+          "room_number",
+          "arrival",
+          "paid_amount"    
+        ],
+        "properties": {
+          "room_id" : {
+            "type": "integer",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "room_number" : {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "phone" : {
+            "type" : "string",
+            "minimum": 1,
+            "maximum": 150
+          },
+          "email":{
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+     }
+}
