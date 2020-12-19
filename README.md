@@ -75,8 +75,8 @@ SQL File is in the project directory.
      * pass json object contain username and password.
 2. login route - `http://localhost:9890/api/login`
      * pass json object contain username and password.
-3. other crud route are in secureApi -  `localhost:9890/secureApi/user`.
-     * In all GET, PUT, DELETE and POST request pass `token` in header which you get in login response.
+3. other crud route are in secureApi -  `localhost:9890/secureApi/book`, `localhost:9890/secureApi/customer`, `localhost:9890/secureApi/checkin`, `localhost:9890/secureApi/checkout`
+     * In all GET and POST request pass `token` in header which you get in login response.
 
 Example object for login request (body as JSON object) -
 
@@ -90,10 +90,12 @@ For Other Crud request -
 
 ```
 {
-   "name":"username",
-   "age:11,
-   "state":"statename",
-   "country":"countryname"
+    "customerId": 5,
+    "roomNumber": "401",
+    "arrivalTime": "2021-04-01 08:00:00",
+    "checkoutTime": "2021-04-02 06:00:00",
+    "paymentAmount": 3000,
+    "maxPersons": 5
 }
 
 ```
@@ -104,37 +106,13 @@ Note: You have to pass `token` for each request as header which youi will get in
 * To perform basic operation all `Create`, `Fetch`, `Delete` and `Update` functionality.
 * Used Express framework to obtain required operations.
 * Used Express router to route endpoint path.
-* Used JWT Token for security and authentication of API.
+* Used JWT Web Token for security and authentication of API.
 * MVC structure in which `Route`, `Service` and `Model` layer.
 * Used AJV as schema validator which validate request and response schema.
 * Used Connection Pooling which lead to reduce number of conncetion at any point of time and reduce stress in DB which leads to better availability and Performance of DB.
-* Used common error structure format for all type of error throwing in Application.
-* Includes `documents` folder which contain swagger representation both in JSON and HTML, which will help front-end developer for better understanding.
-* `Pm2` a process manager which help to watch, reload, restart and monitor with load balancer in each and every activity.
 * `nodemailer` is used to send mail over SMTP. as for i now used for sending mail if error comes.
 * `bcrypt` is used to encrypt your password through salt and hashing technique and which won't store password as plain text in database.
 * `artillery` is used to perform load testing which will check sustainibility of your API at `high traffic`.
-
-# Swagger Related task
-
-1. How to Open Swagger - 
-    * [open](http://editor.swagger.io) 
-2. Go to `File` and `import file` option, import `JSON` file present in `document` folder.
-3. To Download `HTML` file of particular `JSON` 
-   * Go to `Generate Client` option and `html2` option it will download html file.
-4. Know more about Swagger [Check here](https://swagger.io/docs/)
-
----
-
-# Artillery Run 
-
-1. First go to `/loadtest` folder
-2. you can use artillery in 2 way :-
-   * by hardcoding data in yml file.
-   * getting data by `.csv` file.
-3. For option 1 run - `artillery run hello.yml`
-4. For option 2 first get CSV file with data.
-5. define path in yml file and run example as i Did :- `artillery run hellocsv.yml`        
 
 
 
