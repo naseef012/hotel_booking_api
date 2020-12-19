@@ -1,5 +1,6 @@
 # Node JS RESTful Service for Hotel Booking
 
+# Please find the MySQL Dump of the Database in `db_file_dump`
 
 
 # PreRequisite
