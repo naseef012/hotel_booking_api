@@ -30,6 +30,8 @@ function addNewBooking (booking) {
 // arrivalTime, checkoutTime, roomNumber
 // this function returns the list of bookings existing in the same period
 function getBookingInfo(booking) {
+    console.log(" =========== 3 ==============")
+
     return new Promise((resolve, reject)=>{
         let sql = "SELECT * FROM tb_bookings WHERE (room_number = ?) AND ((? BETWEEN arrival AND checkout) OR (? BETWEEN arrival AND checkout) OR (arrival BETWEEN ? AND ?)) AND status IN (1,3) ";
 

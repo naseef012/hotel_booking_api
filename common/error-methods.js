@@ -60,6 +60,7 @@ module.exports = {
     let message = {};
     message[errorCode] = error.message
     messages.push(message);
+
   })
 
   return ({
@@ -76,10 +77,11 @@ module.exports = {
   })
   },
 
+
   getErrorCode: function (statusCodeValue) {
     if (errorCode[statusCodeValue])
       return errorCode[statusCodeValue];
     else
-      return errorCode.INVALID_DATA
+      return errorCode.INVALID_DATA;
   }
 }

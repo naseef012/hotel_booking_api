@@ -7,7 +7,6 @@ var db = require('./database');
 var dbfunc = require('./db-function');
 var http  = require('http')
 var bodyParser = require('body-parser');
-var UserRoute = require('../app/routes/user.route');
 var AuthenticRoute = require('../app/routes/authentic.route');
 let CustomerRoute = require('../app/routes/customer.route');
 let RoomBookingRoute = require('../app/routes/room-booking.route');
@@ -84,7 +83,6 @@ var ApiConfig = {
   app: app
 }
 
-UserRoute.init(secureApi);
 CustomerRoute.init(secureApi);
 RoomBookingRoute.init(secureApi);
 module.exports = ApiConfig;

@@ -12,6 +12,7 @@ let roomBookingService = {
 function addNewBooking (bookingData) {
     return new Promise((resolve,reject) => {
         roomModel.getRoomInfoById(bookingData).then((data1) => {
+            console.log(" =========== 1 ==============")
             if(data1 == 0) {
                 let message = {
                     "message": "NO ROOM EXISTS BASED ON GIVEN SPECIFICATIONS",
@@ -37,12 +38,15 @@ function addNewBooking (bookingData) {
                 bookingData.paymentType = paymentType;
                 bookingData.dueAmount = dueAmount;
                 roomBookingModel.getBookingInfo(bookingData).then((data)=>{
+                    console.log(" =========== 2 ==============")
+
                     if(data == 0) {
                         roomBookingModel.addNewBooking(bookingData).then((data2)=>{
+                            console.log(" ======== 5 =========")
                             let message = {
                                 "message": "BOOKING SUCCESSFULLY COMPLETED",
                                 "data": {
-                                    "booking_id": insertId,
+                                    "booking_id": data2.insertId,
                                     "db_response": data2
                                 }
                             }
