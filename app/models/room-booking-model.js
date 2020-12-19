@@ -8,7 +8,8 @@ let roomBookingModel = {
     getBookingForCheckin: getBookingForCheckin,
     roomCheckin: roomCheckin,
     roomCheckout: roomCheckout,
-    getAllBookings: getAllBookings
+    getAllBookings: getAllBookings,
+    validateActiveBooking: validateActiveBooking
 }
 // customerPhone, roomId, roomNumber, arrivalTime, checkoutTime, paymentAmount
 // paymentType, customerId
@@ -146,5 +147,25 @@ function getAllBookings() {
         })
     }); 
 }
+
+function validateActiveBooking (bookingInfo) {
+    return new Promise((resolve, reject)=>{
+        let sql = "SELECT * FROM tb_bookings WHERE customer_id = ? AND status IN (1,3)";
+        let params = [bookingInfo.customerId];
+        db.query(sql,params,(errors,rows,fields)=>{
+            if(!!errors) {
+                dbFunc.connectionRelease;
+                reject(errors);
+            } else {
+                if (rows.length == 0) {
+                    resolve(0);
+                }
+                dbFunc.connectionRelease;
+                resolve(rows);
+            }
+        })
+    });
+}
+
 
 module.exports = roomBookingModel;
