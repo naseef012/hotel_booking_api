@@ -114,9 +114,7 @@ Note: You have to pass `token` for each request as header which youi will get in
 * MVC structure in which `Route`, `Service` and `Model` layer.
 * Used AJV as schema validator which validate request and response schema.
 * Used Connection Pooling which lead to reduce number of conncetion at any point of time and reduce stress in DB which leads to better availability and Performance of DB.
-* `nodemailer` is used to send mail over SMTP. as for i now used for sending mail if error comes.
 * `bcrypt` is used to encrypt your password through salt and hashing technique and which won't store password as plain text in database.
-* `artillery` is used to perform load testing which will check sustainibility of your API at `high traffic`.
 
 
 
