@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "7dd1b9c0-9ccb-4351-aa6e-9970fca2a0d9",
+		"name": "GP_CodeMaster_Hotel_booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RegisterCustomer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgzNTk3ODcsImV4cCI6MTYwODQ0NjE4N30.bQpIaJV6OdezTF55pgJ5T_5eFzi80izMTT2_wzLnLcw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"fname\":\"Sabbir\",\n   \"lname\":\"Ridwan\",\n   \"phone\":\"01700706930\",\n   \"email\":\"sabbir@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/secureApi/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"secureApi",
+						"customer"
+					]
+				},
+				"description": "This API lets the customer be registered into the system"
+			},
+			"response": []
+		},
+		{
+			"name": "RoomBooking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgzNjUyNDEsImV4cCI6MTYwODQ1MTY0MX0.C0sd6BVrvYBZ5um95qgIdJL7bF_LBpz-tWkxqdYGH0s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": 5,\n    \"roomNumber\": \"401\",\n    \"arrivalTime\": \"2021-04-01 08:00:00\",\n    \"checkoutTime\": \"2021-04-02 06:00:00\",\n    \"paymentAmount\": 3000,\n    \"maxPersons\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/secureApi/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"secureApi",
+						"book"
+					]
+				},
+				"description": "This API lets the Hotel Admins to Book a room"
+			},
+			"response": []
+		},
+		{
+			"name": "HotelAdminLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"test\",\n    \"password\":\"testpass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "This API lets the Hotel Admin Log into the system"
+			},
+			"response": []
+		},
+		{
+			"name": "HotelAdminSignup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"test2\",\n    \"password\":\"testpass2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/api/signUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"api",
+						"signUp"
+					]
+				},
+				"description": "This API lets the Hotel Admin to signup"
+			},
+			"response": []
+		},
+		{
+			"name": "RoomCheckIn",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "abc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/secureApi/checkin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"secureApi",
+						"checkin"
+					]
+				},
+				"description": "This API lets the hotel admin to check in the Customer"
+			},
+			"response": []
+		},
+		{
+			"name": "RoomCheckout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgzNzMwNDMsImV4cCI6MTYwODQ1OTQ0M30.3AJmhkwOjhQjsHcmZsQ44zQ_37ddCm9S_KlGVt1T-Ko",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\":\"01712894524\",\n    \"dueAmount\": 2000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9890/secureApi/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"secureApi",
+						"checkout"
+					]
+				},
+				"description": "This API lets the hotel admin check out the customer"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllBookings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgzNzMwNDMsImV4cCI6MTYwODQ1OTQ0M30.3AJmhkwOjhQjsHcmZsQ44zQ_37ddCm9S_KlGVt1T-Ko",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9890/secureApi/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9890",
+					"path": [
+						"secureApi",
+						"book"
+					]
+				},
+				"description": "This API lets the hotel Admin get all the room bookings"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
