@@ -14,7 +14,6 @@ function addNewBooking (bookingData) {
                     "message": "NO ROOM EXISTS BASED ON GIVEN SPECIFICATIONS",
                     "data": data1
                 };
-                console.log(" FOUND NO ROOOM ")
                 resolve(message);
             } else {
                 roomBookingModel.getBookingInfo(bookingData).then((data)=>{
@@ -26,7 +25,7 @@ function addNewBooking (bookingData) {
                         }))
                     } else {
                         let message = {
-                            "message": "Booking ALREADY EXISTS",
+                            "message": "BOOKING ALREADY EXISTS",
                             "data": data
                         } ;
                         resolve(message);
