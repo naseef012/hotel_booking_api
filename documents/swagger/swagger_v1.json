@@ -6,10 +6,10 @@
       "description": "This is aimed to maintain sampling related transactions like user and other etc. ",
       "termsOfService": "http://www.itjunkies.in",
       "contact": {
-        "name": "yugagrawal95@gmail.com"
+        "name": "naseefmohammed012@gmail.com"
       }
     },
-    "host": "dev.itjunkies.in",
+    "host": "localhost:9890",
     "basePath": "/",
     "schemes": [
       "http",
