@@ -51,7 +51,7 @@ npm install jsonwebtoken
 npm install bcrypt  
 ```
 * bcrypt will encrypt your password throughing hashing so your password won't store as plain text .[know more about bcrypt](https://www.npmjs.com/package/bcrypt)
-* To Know more about nodemailer [check here](https://www.npmjs.com/package/bcrypt)
+* To Know more about bcrypt [check here](https://www.npmjs.com/package/bcrypt)
 
 ---
 
