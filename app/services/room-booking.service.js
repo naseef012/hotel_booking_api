@@ -17,9 +17,10 @@ function addNewBooking (bookingData) {
             } else {
                 let paymentAmount = bookingData.paymentAmount;
                 let paymentType = 0;
-                if (data1[0].price > paymentAmount) {
+                let dueAmount = data1[0].price - paymentAmount;
+                if (dueAmount > 0) {
                     paymentType = 1;
-                } else if (paymentAmount == data1[0].price) {
+                } else if (dueAmount == 0) {
                     paymentType = 2;
                 } else {
                     let message = {
@@ -30,6 +31,7 @@ function addNewBooking (bookingData) {
                     return;
                 }
                 bookingData.paymentType = paymentType;
+                bookingData.dueAmount = dueAmount;
                 roomBookingModel.getBookingInfo(bookingData).then((data)=>{
                     if(data == 0) {
                         roomBookingModel.addNewBooking(bookingData).then((data2)=>{
