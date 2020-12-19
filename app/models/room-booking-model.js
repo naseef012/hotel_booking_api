@@ -30,7 +30,7 @@ function addNewBooking (booking) {
 // this function returns the list of bookings existing in the same period
 function getBookingInfo(booking) {
     return new Promise((resolve, reject)=>{
-        let sql = "SELECT * FROM tb_bookings WHERE (room_number = ?) AND ((? BETWEEN arrival AND checkout) OR (? BETWEEN arrival AND checkout) OR (arrival BETWEEN ? AND ?) AND status IN (1,3)) ";
+        let sql = "SELECT * FROM tb_bookings WHERE (room_number = ?) AND ((? BETWEEN arrival AND checkout) OR (? BETWEEN arrival AND checkout) OR (arrival BETWEEN ? AND ?)) AND status IN (1,3) ";
 
         let params = [booking.roomNumber, booking.arrivalTime, booking.checkoutTime, booking.arrivalTime, booking.checkoutTime,];
         db.query(sql,params,(errors,rows,fields)=>{
@@ -38,6 +38,10 @@ function getBookingInfo(booking) {
                 dbFunc.connectionRelease;
                 reject(errors);
             } else {
+                if (rows.length == 0) {
+                    resolve(0);
+                    return;
+                }
                 dbFunc.connectionRelease;
                 resolve(rows);
             }
