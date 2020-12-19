@@ -5,6 +5,8 @@ let roomBookingModel = {
     addNewBooking: addNewBooking,
     getBookingInfo: getBookingInfo,
     getBookingForCheckout: getBookingForCheckout,
+    getBookingForCheckin: getBookingForCheckin,
+    roomCheckin: roomCheckin,
     roomCheckout: roomCheckout
 }
 // customerPhone, roomId, roomNumber, arrivalTime, checkoutTime, paymentAmount
@@ -61,11 +63,29 @@ function getBookingForCheckout(checkoutData) {
         })
     });
 }
-// bookingId, paidAmount
-function roomCheckout(bookingId) {
-    console.log(" ============= HELO FROM roomCheckout ========= "+JSON.stringify(bookingId));
+// customerId
+function getBookingForCheckin(checkoutData) {
     return new Promise((resolve, reject)=>{
-        let sql = "UPDATE tb_bookings SET status = 2, due_amount = 0, paid_amount =?  WHERE id = ?";
+        let sql = "SELECT * FROM tb_bookings WHERE customer_id = ? AND status = 1";
+        let params = [checkoutData.customerId];
+        db.query(sql,params,(errors,rows,fields)=>{
+            if(!!errors) {
+                dbFunc.connectionRelease;
+                reject(errors);
+            } else {
+                if (rows.length == 0) {
+                    resolve(0);
+                }
+                dbFunc.connectionRelease;
+                resolve(rows);
+            }
+        })
+    });
+}
+// id, paidAmount
+function roomCheckout(bookingId) {
+    return new Promise((resolve, reject)=>{
+        let sql = "UPDATE tb_bookings SET status = 2, due_amount = 0, paid_amount =?, payment_type = 2 WHERE id = ?";
         let params = [bookingId.paidAmount,bookingId.id];
         db.query(sql,params,(errors,rows,fields)=>{
             if(!!errors) {
@@ -75,6 +95,24 @@ function roomCheckout(bookingId) {
                 if (rows.length == 0) {
                     resolve(0);
                 }
+                dbFunc.connectionRelease;
+                resolve(rows);
+            }
+        })
+    });
+
+}
+// id
+function roomCheckin(bookingId) {
+    console.log(" ============= HELO FROM roomCheckout ========= "+JSON.stringify(bookingId));
+    return new Promise((resolve, reject)=>{
+        let sql = "UPDATE tb_bookings SET status = 3 WHERE id = ?";
+        let params = [bookingId.id];
+        db.query(sql,params,(errors,rows,fields)=>{
+            if(!!errors) {
+                dbFunc.connectionRelease;
+                reject(errors);
+            } else {
                 dbFunc.connectionRelease;
                 resolve(rows);
             }

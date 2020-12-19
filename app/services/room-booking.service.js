@@ -3,7 +3,8 @@ let roomModel = require('../models/room.model');
 let customerModel = require('../models/customer_model');
 let roomBookingService = {
     addNewBooking: addNewBooking,
-    bookingCheckout: bookingCheckout
+    bookingCheckout: bookingCheckout,
+    bookingCheckIn: bookingCheckIn
 }
 
 
@@ -37,13 +38,20 @@ function addNewBooking (bookingData) {
                 roomBookingModel.getBookingInfo(bookingData).then((data)=>{
                     if(data == 0) {
                         roomBookingModel.addNewBooking(bookingData).then((data2)=>{
-                            resolve(data2);
+                            let message = {
+                                "message": "BOOKING SUCCESSFULLY COMPLETED",
+                                "data": {
+                                    "booking_id": insertId,
+                                    "db_response": data2
+                                }
+                            }
+                            resolve(message);
                         }).catch((error => {
                             reject(error);
                         }))
                     } else {
                         let message = {
-                            "message": "BOOKING ALREADY EXISTS",
+                            "message": "BOOKING ALREADY EXISTS FOR THIS ROOM",
                             "data": data
                         } ;
                         resolve(message);
@@ -95,6 +103,47 @@ function bookingCheckout (checkoutData) {
                         roomBookingModel.roomCheckout(checkoutInfo).then((data3)=>{
                             let message = {
                                 "message": "CUSTOMER SUCCESSFULLY CHECKED OUT",
+                                "data": data3
+                            };
+                            resolve(message);
+                        }).catch((error3)=>{
+                            reject(error3);
+                        });
+                    }
+                }).catch((error)=>{
+                    reject(error);
+                });
+            }
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+// phone
+function bookingCheckIn (checkinData) {
+    return new Promise((resolve,reject) => {
+        customerModel.getAllCustomerByIdentifier(checkinData).then((data)=>{
+            if(data == 0) {
+                let message = {
+                    "message": "CUSTOMER DOES NOT EXIST",
+                    "data": data
+                } ;
+                resolve(message);
+            } else {
+                checkinData.customerId = data[0].id;
+                roomBookingModel.getBookingForCheckin(checkinData).then((data2)=>{
+                    if(data2 == 0) {
+                        let message = {
+                            "message": "THIS CUSTOMER HAS NOT BOOKED ANY ROOM",
+                            "data": data2
+                        };
+                        resolve(message);
+                    } else {
+                    
+                        let checkinInfo = data2[0];
+                        roomBookingModel.roomCheckin(checkinInfo).then((data3)=>{
+                            let message = {
+                                "message": "CUSTOMER SUCCESSFULLY CHECKED IN",
                                 "data": data3
                             };
                             resolve(message);
