@@ -7,7 +7,6 @@ let roomBookingService = {
 
 function addNewBooking (bookingData) {
     return new Promise((resolve,reject) => {
-
         roomModel.getRoomInfoById(bookingData).then((data1) => {
             if(data1 == 0) {
                 let message = {
@@ -16,6 +15,21 @@ function addNewBooking (bookingData) {
                 };
                 resolve(message);
             } else {
+                let paymentAmount = bookingData.paymentAmount;
+                let paymentType = 0;
+                if (data1[0].price > paymentAmount) {
+                    paymentType = 1;
+                } else if (paymentAmount == data1[0].price) {
+                    paymentType = 2;
+                } else {
+                    let message = {
+                        "message": "PAID AMOUNT IS MORE THAN THE PRICE OF THE ROOM",
+                        "data": []
+                    };
+                    resolve(message);
+                    return;
+                }
+                bookingData.paymentType = paymentType;
                 roomBookingModel.getBookingInfo(bookingData).then((data)=>{
                     if(data == 0) {
                         roomBookingModel.addNewBooking(bookingData).then((data2)=>{
@@ -32,29 +46,11 @@ function addNewBooking (bookingData) {
                     }
                 }).catch((err) => {
                     reject(err);
-                })
+                });
             }
         }).catch((errorbig)=>{
             reject(errorbig);
-        })
-
-        // roomBookingModel.getBookingInfo(bookingData).then((data)=>{
-        //     if(data == 0) {
-        //         roomBookingModel.addNewBooking(bookingData).then((data2)=>{
-        //             resolve(data2);
-        //         }).catch((error => {
-        //             reject(error);
-        //         }))
-        //     } else {
-        //         let message = {
-        //             "message": "Booking ALREADY EXISTS",
-        //             "data": data
-        //         } ;
-        //         resolve(message);
-        //     }
-        // }).catch((err) => {
-        //     reject(err);
-        // })
+        });
     })
 }
 
