@@ -1,7 +1,9 @@
 let roomBookingModel = require('../models/room-booking-model');
 let roomModel = require('../models/room.model');
+let customerModel = require('../models/customer_model');
 let roomBookingService = {
-    addNewBooking: addNewBooking
+    addNewBooking: addNewBooking,
+    bookingCheckout: bookingCheckout
 }
 
 
@@ -53,6 +55,60 @@ function addNewBooking (bookingData) {
         }).catch((errorbig)=>{
             reject(errorbig);
         });
+    })
+}
+
+// phone, dueAmount 
+function bookingCheckout (checkoutData) {
+    return new Promise((resolve,reject) => {
+        customerModel.getAllCustomerByIdentifier(checkoutData).then((data)=>{
+            if(data == 0) {
+                let message = {
+                    "message": "CUSTOMER DOES NOT EXIST",
+                    "data": data
+                } ;
+                resolve(message);
+            } else {
+                checkoutData.customerId = data[0].id;
+                roomBookingModel.getBookingForCheckout(checkoutData).then((data2)=>{
+                    if(data2 == 0) {
+                        let message = {
+                            "message": "THIS IS USER IS NOT CHECKED IN",
+                            "data": data2
+                        };
+                        resolve(message);
+                    } else {
+                        if (data2[0].due_amount > checkoutData.dueAmount) {
+                            let message = {
+                                "message": "CUSTOMER OWES MORE AMOUNT TO THE HOTEL",
+                                "data": {
+                                    "booking_id": data2[0].id,
+                                    "room_number": data2[0].room_number,
+                                    "due_amount": (data2[0].due_amount - checkoutData.dueAmount)
+                                }
+                            };
+                            resolve(message);
+                            return;
+                        }
+                        data2[0].paidAmount = data2[0].paid_amount + data2[0].due_amount;
+                        let checkoutInfo = data2[0];
+                        roomBookingModel.roomCheckout(checkoutInfo).then((data3)=>{
+                            let message = {
+                                "message": "CUSTOMER SUCCESSFULLY CHECKED OUT",
+                                "data": data3
+                            };
+                            resolve(message);
+                        }).catch((error3)=>{
+                            reject(error3);
+                        });
+                    }
+                }).catch((error)=>{
+                    reject(error);
+                });
+            }
+        }).catch((err) => {
+            reject(err);
+        })
     })
 }
 
