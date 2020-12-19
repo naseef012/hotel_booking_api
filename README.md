@@ -1,7 +1,10 @@
 # Node JS RESTful Service for Hotel Booking
 
-# Please find the MySQL Dump of the Database in `db_file_dump`
+# Please find the MySQL Dump of the Database in `db_file_dump` folder
 
+# Please find below the link of POSTMAN API Doc link
+
+https://www.getpostman.com/collections/9f3d8dda1ac2f49843e0
 
 # PreRequisite
 
