@@ -8,7 +8,8 @@ var mail = require('./../../common/mailer.js');
 
 function init(router) {
   router.route('/book')
-    .post(addNewBooking);
+    .post(addNewBooking)
+    .get(getAllBookings)
   router.route('/checkout')
     .post(bookingCheckout);
   router.route('/checkin')
@@ -62,6 +63,24 @@ function bookingCheckin(req, res) {
    }
 
   roomBookingService.bookingCheckIn(checkinData).then((data) => {
+    res.json(data);
+  }).catch((err) => {
+    mail.mail(err);
+    res.json(err);
+  });
+
+}
+
+function getAllBookings (req,res) {
+  var checkinData = req.params;
+
+  // Validating the input entity
+   var json_format = iValidator.json_schema(schema.getSchema, checkinData, "user");
+   if (json_format.valid == false) {
+     return res.status(422).send(json_format.errorMessage);
+   }
+
+  roomBookingService.getAllBookings().then((data) => {
     res.json(data);
   }).catch((err) => {
     mail.mail(err);

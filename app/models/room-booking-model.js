@@ -7,7 +7,8 @@ let roomBookingModel = {
     getBookingForCheckout: getBookingForCheckout,
     getBookingForCheckin: getBookingForCheckin,
     roomCheckin: roomCheckin,
-    roomCheckout: roomCheckout
+    roomCheckout: roomCheckout,
+    getAllBookings: getAllBookings
 }
 // customerPhone, roomId, roomNumber, arrivalTime, checkoutTime, paymentAmount
 // paymentType, customerId
@@ -123,6 +124,25 @@ function roomCheckin(bookingId) {
         })
     });
 
+}
+
+function getAllBookings() {
+    return new Promise((resolve, reject)=>{
+        let sql = "SELECT * FROM tb_bookings";
+        let params = [];
+        db.query(sql,params,(errors,rows,fields)=>{
+            if(!!errors) {
+                dbFunc.connectionRelease;
+                reject(errors);
+            } else {
+                if (rows.length == 0) {
+                    resolve(0);
+                }
+                dbFunc.connectionRelease;
+                resolve(rows);
+            }
+        })
+    }); 
 }
 
 module.exports = roomBookingModel;

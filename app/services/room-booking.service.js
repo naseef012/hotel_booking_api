@@ -4,7 +4,8 @@ let customerModel = require('../models/customer_model');
 let roomBookingService = {
     addNewBooking: addNewBooking,
     bookingCheckout: bookingCheckout,
-    bookingCheckIn: bookingCheckIn
+    bookingCheckIn: bookingCheckIn,
+    getAllBookings: getAllBookings
 }
 
 
@@ -159,6 +160,20 @@ function bookingCheckIn (checkinData) {
             reject(err);
         })
     })
+}
+
+function getAllBookings () {
+    return new Promise((resolve,reject) => {
+        roomBookingModel.getAllBookings().then((data)=>{
+            let message = {
+                "message": "ALL BOOKING DATA SUCCESSFULLY EXTRACTED",
+                "data": data
+            }
+            resolve(message);
+        }).catch((err) => {
+            reject(err);
+        })
+    });
 }
 
 module.exports = roomBookingService;

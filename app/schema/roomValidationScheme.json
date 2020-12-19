@@ -2,8 +2,7 @@
     "getSchema":{
        "type": "object",
        "required": [
-         "room_number",
-         "room_id"     
+           
        ],
        "properties": {
          "room_id" : {
