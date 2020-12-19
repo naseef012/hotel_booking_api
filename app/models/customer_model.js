@@ -4,12 +4,12 @@ var dbFunc = require('../../config/db-function');
 
 let customer_model = {
     addNewCustomer: addNewCustomer,
-    getAllCustomer: getAllCustomer
+    getAllCustomerByIdentifier: getAllCustomerByIdentifier
 }
 // fname, lname, email, phone
-let addNewCustomer = (user) => {
+function addNewCustomer (user) {
     return new Promise((resolve, reject)=>{
-        let sql = "INSERT INTO tb_customer (first_name, last_name, email, phone) VALUES (?,?,?,?)";
+        let sql = "INSERT INTO tb_customers (first_name, last_name, email, phone) VALUES (?,?,?,?)";
         let params = [user.fname, user.lname, user.email, user.phone];
         db.query(sql,params,(errors,rows,fields)=>{
             if(!!errors) {
@@ -23,15 +23,18 @@ let addNewCustomer = (user) => {
     });
 }
 
-let getAllCustomer = () => {
+function getAllCustomerByIdentifier (user) {
     return new Promise((resolve, reject)=>{
-        let sql = "SELECT * FROM tb_customer";
+        let sql = "SELECT * FROM tb_customers WHERE (phone LIKE '%"+user.phone+"%') ";
         let params = [];
         db.query(sql,params,(errors,rows,fields)=>{
             if(!!errors) {
                 dbFunc.connectionRelease;
-                reject(error);
+                reject(errors);
             } else {
+                if(rows.length == 0) {
+                    resolve(0);
+                }
                 dbFunc.connectionRelease;
                 resolve(rows)   ;
             }
@@ -39,4 +42,4 @@ let getAllCustomer = () => {
     });
 }
 
-module.exports = vendor_model;
+module.exports = customer_model;

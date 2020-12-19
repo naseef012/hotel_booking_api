@@ -1,0 +1,41 @@
+{
+    "getSchema":{
+       "type": "object",
+       "required": [
+         "id"     
+       ],
+       "properties": {
+         "id" : {
+           "type": "integer"
+         }
+       }
+    },
+    "postSchema":{
+        "type": "object",
+        "required": [
+          "phone"     
+        ],
+        "properties": {
+          "fname" : {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "lname" : {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "phone" : {
+            "type" : "string",
+            "minimum": 1,
+            "maximum": 150
+          },
+          "email":{
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+     }
+}

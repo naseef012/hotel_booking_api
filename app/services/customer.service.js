@@ -7,8 +7,20 @@ let customerService = {
 
 function addNewCustomer(userData) {
     return new Promise((resolve,reject) => {
-        customerModel.addNewCustomer(userData).then((data)=>{
-            resolve(data);
+        customerModel.getAllCustomerByIdentifier(userData).then((data)=>{
+            if(data == 0) {
+                customerModel.addNewCustomer(userData).then((data2)=>{
+                    resolve(data2);
+                }).catch((error => {
+                    reject(error);
+                }))
+            } else {
+                let message = {
+                    "message": "USER ALREADY EXISTS",
+                    "data": data
+                } ;
+                resolve(message);
+            }
         }).catch((err) => {
             reject(err);
         })

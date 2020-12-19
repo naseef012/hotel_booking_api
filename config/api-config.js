@@ -9,6 +9,7 @@ var http  = require('http')
 var bodyParser = require('body-parser');
 var UserRoute = require('../app/routes/user.route');
 var AuthenticRoute = require('../app/routes/authentic.route');
+let CustomerRoute = require('../app/routes/customer.route');
 var errorCode = require('../common/error-code')
 var errorMessage = require('../common/error-methods')
 var checkToken = require('./secureRoute');
@@ -83,5 +84,6 @@ var ApiConfig = {
 }
 
 UserRoute.init(secureApi);
+CustomerRoute.init(secureApi);
 
 module.exports = ApiConfig;
